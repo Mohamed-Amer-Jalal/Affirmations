@@ -8,7 +8,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,7 +24,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -49,19 +47,14 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AffirmationApp() {
-    val layoutDirection = LocalLayoutDirection.current
+    val layoutDirection = WindowInsets.safeDrawing
+        .asPaddingValues()
+        .calculateStartPadding(LocalLayoutDirection.current)
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
             .statusBarsPadding()
-            .padding(
-                start = WindowInsets.safeDrawing
-                    .asPaddingValues()
-                    .calculateStartPadding(layoutDirection),
-                end = WindowInsets.safeDrawing
-                    .asPaddingValues()
-                    .calculateEndPadding(layoutDirection)
-            )
+            .padding(start = layoutDirection, end = layoutDirection )
     ) { innerPadding ->
         AffirmationList(
             affirmationList = Datasource().loadAffirmations(),
@@ -83,7 +76,7 @@ fun AffirmationCard(affirmation: Affirmation, modifier: Modifier = Modifier) {
                 contentScale = ContentScale.Crop
             )
             Text(
-                text = LocalContext.current.getString(affirmation.stringResourceId),
+                text = stringResource(affirmation.stringResourceId),
                 modifier = Modifier.padding(16.dp),
                 style = MaterialTheme.typography.headlineLarge
             )
@@ -100,7 +93,7 @@ fun AffirmationList(affirmationList: List<Affirmation>, modifier: Modifier = Mod
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun AffirmationCardPreview() {
     AffirmationsTheme {
