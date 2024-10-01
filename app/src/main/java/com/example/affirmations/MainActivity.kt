@@ -93,7 +93,7 @@ fun AffirmationList(affirmationList: List<Affirmation>, modifier: Modifier = Mod
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, showSystemUi = true, locale = "ar")
 @Composable
 fun AffirmationCardPreview() {
     AffirmationsTheme {

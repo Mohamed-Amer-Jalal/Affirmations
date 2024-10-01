@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Affirmations</string>
+    <string name="affirmation1">أنا قوي</string>
+    <string name="affirmation2">أؤمن بنفسي</string>
+    <string name="affirmation3">كل يوم هو فرصة جديدة للنمو وتصبح نسخة أفضل من نفسي.</string>
+    <string name="affirmation4">كل تحد في حياتي هو فرصة للتعلم.</string>
+    <string name="affirmation5">لدي الكثير لأكون ممتنًا له.</string>
+    <string name="affirmation6">الأشياء الجيدة تأتي دائمًا إلى حياتي.</string>
+    <string name="affirmation7">فرص جديدة تنتظرني في كل منعطف.</string>
+    <string name="affirmation8">لدي الشجاعة لأتبع قلبي.</string>
+    <string name="affirmation9">الأشياء ستتكشف في الوقت المناسب.</string>
+    <string name="affirmation10">سأكون حاضرًا في كل اللحظات التي يجلبها هذا اليوم.</string>
+</resources>
