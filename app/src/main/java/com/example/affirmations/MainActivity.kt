@@ -25,12 +25,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.affirmations.data.Affirmation
 import com.example.affirmations.data.Datasource
+import com.example.affirmations.ui.AffirmationApp
 import com.example.affirmations.ui.theme.AffirmationsTheme
 
 class MainActivity : ComponentActivity() {
@@ -42,61 +43,5 @@ class MainActivity : ComponentActivity() {
                 AffirmationApp()
             }
         }
-    }
-}
-
-@Composable
-fun AffirmationApp() {
-    val layoutDirection = WindowInsets.safeDrawing
-        .asPaddingValues()
-        .calculateStartPadding(LocalLayoutDirection.current)
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .statusBarsPadding()
-            .padding(start = layoutDirection, end = layoutDirection )
-    ) { innerPadding ->
-        AffirmationList(
-            affirmationList = Datasource().loadAffirmations(),
-            modifier = Modifier.padding(innerPadding)
-        )
-    }
-}
-
-@Composable
-fun AffirmationCard(affirmation: Affirmation, modifier: Modifier = Modifier) {
-    Card(modifier = modifier) {
-        Column {
-            Image(
-                painter = painterResource(affirmation.imageResourceId),
-                contentDescription = stringResource(affirmation.stringResourceId),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(194.dp),
-                contentScale = ContentScale.Crop
-            )
-            Text(
-                text = stringResource(affirmation.stringResourceId),
-                modifier = Modifier.padding(16.dp),
-                style = MaterialTheme.typography.headlineLarge
-            )
-        }
-    }
-}
-
-@Composable
-fun AffirmationList(affirmationList: List<Affirmation>, modifier: Modifier = Modifier) {
-    LazyColumn {
-        items(affirmationList) { affirmation ->
-            AffirmationCard(affirmation = affirmation, modifier = modifier.padding(8.dp))
-        }
-    }
-}
-
-@Preview(showBackground = true, showSystemUi = true, locale = "ar")
-@Composable
-fun AffirmationCardPreview() {
-    AffirmationsTheme {
-        AffirmationApp()
     }
 }
